@@ -12,7 +12,7 @@ import kr.or.team4.dao.MemberDao;
 import kr.or.team4.dto.MemberDto;
 
 public class alllist implements Action {
-
+	//찬수
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		ActionForward forward = new ActionForward();
