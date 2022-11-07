@@ -82,9 +82,9 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 	function handlerStateChange(){
 		 if(httpReq.readyState == 4){ //1. 서버에서 응답이 왔다면
 			 if(httpReq.status >= 200 && httpReq.status < 300){
-				//ㅇㅅㅇㅅㅇㅅㅇㅅㅇㅅㅇㅅㅇㅅㅇ
+			
 				document.getElementById("test").innerHTML = httpReq.responseText;
-				//ㅇㅅㅇㅅㅇㅅㅇㅅㅇㅅㅇㅅㅇㅅㅇ
+			
 			 }else{
 				 alert("status Text : " + httpReq.status);
 			 }
