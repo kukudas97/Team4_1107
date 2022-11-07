@@ -15,11 +15,12 @@ import kr.or.team4.action.Action;
 import kr.or.team4.action.ActionForward;
 import kr.or.team4.dao.MemberDao;
 import kr.or.team4.dto.MemberDto;
-
 import kr.or.team4.service.alllist;
-import kr.or.team4.service.registerOk;
 import kr.or.team4.service.delete;
 import kr.or.team4.service.detail;
+import kr.or.team4.service.loginok;
+import kr.or.team4.service.registerOk;
+import kr.or.team4.service.search;
 
 
 @WebServlet("*.do")
@@ -63,25 +64,8 @@ public class MemberServlet extends HttpServlet {
                
                //session에 id 설정
             }else if(urlcommand.equals("/loginok.do")) {
-               // 로그인 여부 확인
-               String id = request.getParameter("id");
-               String pwd = request.getParameter("pwd");
-               
-               MemberDao dao = new MemberDao();
-               System.out.println(1);
-               
-               if(dao.getMemberDtoListById(id) != null) {
-                  if(dao.getMemberDtoListById(id).getPwd().equals(pwd)) {
-                      System.out.println(22);
-                     session.setAttribute("id", id);
-                     viewpage="/WEB-INF/views/main.jsp";
-                  }else {
-                      System.out.println(11);
-                     viewpage="/WEB-INF/views/login.jsp";
-                  }
-               }else {
-                  viewpage="/WEB-INF/views/register.jsp";
-               }
+            	action = new loginok();
+            	forward = action.execute(request, response);
             }else if (urlcommand.equals("/logout.do")) {
             	request.getSession().invalidate();
             	out.print("<script>alert('로그아웃');</script>");
@@ -153,11 +137,8 @@ public class MemberServlet extends HttpServlet {
                
             } else if (urlcommand.equals("/test.do")){
             	// like조회
-                MemberDao dao = new MemberDao();
-                
-                request.setAttribute("list", dao.getMemberDtoByLikeEmail(request.getParameter("search")));
-                
-                viewpage = "/WEB-INF/test/test.jsp";
+                action = new search();
+                forward = action.execute(request, response);
                 // request.setAttribute("list",여기에값)
             }
             // ... else if 반복
