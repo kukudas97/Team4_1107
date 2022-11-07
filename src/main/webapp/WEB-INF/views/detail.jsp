@@ -38,7 +38,6 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 <!-- Page Content -->
 	<c:set var="member" value="${requestScope.member}"></c:set>
 <div class="w3-padding-large" id="main">
-  <c:set var="list" value="${requestScope.list}"></c:set>
     <h1 class="w3-jumbo">회원리스트</h1>
 					<table class="table table-dark">
 					<thead>
