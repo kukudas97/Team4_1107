@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpSessionContext;
-import javax.websocket.Session;
 
+import kr.or.team4.action.Action;
+import kr.or.team4.action.ActionForward;
 import kr.or.team4.dao.MemberDao;
 import kr.or.team4.dto.MemberDto;
 
@@ -44,6 +44,9 @@ public class MemberServlet extends HttpServlet {
              */
             
             String viewpage = "";
+            Action action = null;
+            ActionForward forward = null;
+            
             HttpSession session = request.getSession();
             PrintWriter out = response.getWriter();
             //3. 요청 서비스 판단 (command 값을 비교해서)
@@ -55,11 +58,8 @@ public class MemberServlet extends HttpServlet {
                //session에 id 설정
             }else if(urlcommand.equals("/loginok.do")) {
                // 로그인 여부 확인
-               System.out.println(1);
                String id = request.getParameter("id");
-               System.out.println(id);
                String pwd = request.getParameter("pwd");
-               System.out.println(pwd);
                
                MemberDao dao = new MemberDao();
                System.out.println(1);
