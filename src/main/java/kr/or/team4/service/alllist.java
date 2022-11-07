@@ -19,11 +19,11 @@ public class alllist implements Action {
 		  // 전체조회
 		MemberDao dao = new MemberDao();
         List<MemberDto> MemberDtolist = dao.getAllMemberDtoList();
-        request.setAttribute("MemberDtolist", MemberDtolist);
+        request.setAttribute("list", MemberDtolist);
         
         forward = new ActionForward();
 		forward.setRedirect(false);
-		forward.setPath("/WEB-INF/views/list");
+		forward.setPath("/WEB-INF/views/list.jsp");
         
 		return forward;
 	}

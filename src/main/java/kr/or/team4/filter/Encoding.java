@@ -8,9 +8,14 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.annotation.WebInitParam;
 import javax.servlet.http.HttpFilter;
 
-@WebFilter("/Encoding")
+@WebFilter(
+			description = "어노테이션 활용해서 필터 적용하기", //설명
+			urlPatterns = {"/*"}, //적용범위
+			initParams = {@WebInitParam(name="encoding",value="UTF-8")} //필터이름,값
+		)
 public class Encoding extends HttpFilter implements Filter {
        
 	//member field 생성

@@ -104,7 +104,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
     <hr style="width:200px" class="w3-opacity">
     <p>회원 정보를 입력해 회원가입하세요!</p>
 
-	<form action="registerOk." method="post" name="joinForm" id="joinForm">
+	<form action="registerok.do" method="post" name="joinForm" id="joinForm">
       <p><input class="w3-input w3-padding-16" type="text" placeholder="id" required name="id"></p>
       <p><input class="w3-input w3-padding-16" type="text" placeholder="pwd" required name="pwd"></p>
       <p><input class="w3-input w3-padding-16" type="text" placeholder="name" required name="name"></p>

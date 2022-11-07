@@ -20,7 +20,7 @@ public class delete implements Action {
 			
 			forward = new ActionForward();
 			forward.setRedirect(false);
-			forward.setPath("/alllist.do");
+			forward.setPath("alllist.do");
 			
 		} catch (Exception e) {
 			// TODO: handle exception

@@ -34,11 +34,11 @@ public class updateok implements Action {
         if(result>0) {
         	//수정 성공
         	msg = "수정 성공";
-        	url = "/alllist.do"; //수정성공하면 전체목록
+        	url = "alllist.do"; //수정성공하면 전체목록
         }else {
         	//수정 실패
         	msg = "수정 실패";
-        	url = "/main.do"; //수정실패하면 메인
+        	url = "main.do"; //수정실패하면 메인
         }
         
         request.setAttribute("update_msg", msg);

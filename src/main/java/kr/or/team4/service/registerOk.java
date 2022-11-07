@@ -35,7 +35,7 @@ public class registerOk implements Action {
            
            ActionForward forward = new ActionForward();
            forward.setRedirect(false);
-           forward.setPath("WEB-INF/views/register.jsp");
+           forward.setPath("main.do");
            
 		return forward;
 	}

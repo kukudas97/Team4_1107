@@ -21,6 +21,8 @@ import kr.or.team4.service.detail;
 import kr.or.team4.service.loginok;
 import kr.or.team4.service.registerOk;
 import kr.or.team4.service.search;
+import kr.or.team4.service.update;
+import kr.or.team4.service.updateok;
 
 
 @WebServlet("*.do")
@@ -41,14 +43,7 @@ public class MemberServlet extends HttpServlet {
             String contextPath = request.getContextPath();
             String urlcommand = requestURI.substring(contextPath.length());
             
-            /*
-             *    주소가 http://192.168.0.22:8090/WebServlet/register.do 라면
-             * requestURI       : /WebServlet/register.do
-             * contextPath    : WebServlet
-             * urlcommand   : /register.do
-             * 
-             * URL 마지막 주소를 추출하고 판단의 근거로 삼기
-             */
+            System.out.println(urlcommand);
             
             String viewpage = "";
             Action action = null;
@@ -60,7 +55,10 @@ public class MemberServlet extends HttpServlet {
             //4. 데이터 저장 
             if(urlcommand.equals("/login.do")) {
                //로그인
-               viewpage="/WEB-INF/views/login.jsp";
+                forward = new ActionForward();
+                forward.setPath("/WEB-INF/views/login.jsp");
+                forward.setRedirect(false);
+//               viewpage="/WEB-INF/views/login.jsp";
                
                //session에 id 설정
             }else if(urlcommand.equals("/loginok.do")) {
@@ -69,11 +67,15 @@ public class MemberServlet extends HttpServlet {
             }else if (urlcommand.equals("/logout.do")) {
             	request.getSession().invalidate();
             	out.print("<script>alert('로그아웃');</script>");
-                viewpage="/WEB-INF/views/main.jsp";
+                forward = new ActionForward();
+                forward.setPath("/WEB-INF/views/main.jsp");
+                forward.setRedirect(false);
             }
             else if(urlcommand.equals("/register.do")) {
                // 회원가입
-               viewpage="/WEB-INF/views/register.jsp";
+                forward = new ActionForward();
+                forward.setPath("/WEB-INF/views/register.jsp");
+                forward.setRedirect(false);
             } else if(urlcommand.equals("/registerok.do")) {
                // 회원가입
                action = new registerOk();
@@ -82,9 +84,12 @@ public class MemberServlet extends HttpServlet {
                // 전체조회
             	action = new alllist();
             	forward=action.execute(request, response);
+            	System.out.println(forward.getPath());
                // request.setAttribute("list",여기에값)
             } else if (urlcommand.equals("/main.do")) {
-                viewpage = "/WEB-INF/views/main.jsp";
+                forward = new ActionForward();
+                forward.setPath("/WEB-INF/views/main.jsp");
+                forward.setRedirect(false);
              } 
             else if(urlcommand.equals("/search.do")) {
                // like조회
@@ -96,58 +101,35 @@ public class MemberServlet extends HttpServlet {
                // request.setAttribute("list",여기에값)
             } else if(urlcommand.equals("/update.do")) {
                // 수정
-            	MemberDao dao = new MemberDao();
-            	
-            	request.setAttribute("member", dao.getMemberDtoListById(request.getParameter("id")));
-            	
-               viewpage =  "/WEB-INF/views/edit.jsp";
+            	action = new update();
+            	forward = action.execute(request, response);
                //수정 후 전체조회로
             } else if(urlcommand.equals("/updateok.do")) {
                // 수정
-               MemberDao dao = new MemberDao();
-                              
-               MemberDto dto = new MemberDto();
-               
-               dto.setId(request.getParameter("id"));
-               dto.setName(request.getParameter("name"));
-               dto.setAge(Integer.parseInt(request.getParameter("age")));
-               dto.setGender(request.getParameter("gender"));
-               dto.setEmail(request.getParameter("email"));
-               
-               int row = 0;
-               
-               row = dao.updateMemberDto(dto);
-               if(row>0) {
-                  out.print("<script>alert('수정됨')</script>");
-               }else {
-                  out.print("<script>alert('실패')</script>");
-               }
-               
-               viewpage = "/alllist.do";
-               //수정 후 전체조회로
+            	action = new updateok();
+            	forward = action.execute(request, response);
             } else if(urlcommand.equals("/delete.do")) {
             	action = new delete();
                 forward = action.execute(request, response);
             } else if(urlcommand.equals("/detail.do")){
-
-            	
                action = new detail();
                forward = action.execute(request, response);
-
-               
             } else if (urlcommand.equals("/test.do")){
             	// like조회
                 action = new search();
                 forward = action.execute(request, response);
                 // request.setAttribute("list",여기에값)
             }
-            // ... else if 반복
-            
-            //5. View 지정
-            RequestDispatcher dis = request.getRequestDispatcher(viewpage);
-            
-            dis.forward(request, response);
-            //forward
+
+			if(forward != null) {
+				if(forward.isRedirect()) { //redirect
+					response.sendRedirect(forward.getPath());
+				} else {
+					RequestDispatcher dis = request.getRequestDispatcher(forward.getPath());
+					
+					dis.forward(request, response);
+				}
+			}
    }
 
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
