@@ -15,8 +15,6 @@ import kr.or.team4.action.Action;
 import kr.or.team4.action.ActionForward;
 import kr.or.team4.dao.MemberDao;
 import kr.or.team4.dto.MemberDto;
-import kr.or.team4.service.Detail;
-import kr.or.team4.service.Search;
 
 @WebServlet("*.do")
 public class MemberServlet extends HttpServlet {
@@ -171,17 +169,24 @@ public class MemberServlet extends HttpServlet {
                //삭제 후 전체조회로
                viewpage = "/alllist.do";
             } else if(urlcommand.equals("/detail.do")){
-            	action = new Detail();
-            	forward = action.execute(request, response);
+
+               MemberDao dao = new MemberDao();
+               
+               request.setAttribute("member", dao.getMemberDtoListById(request.getParameter("id")));
+               
+               viewpage = "/WEB-INF/views/detail.jsp";
             } else if (urlcommand.equals("/test.do")){
-                action = new Search();
-                forward = action.execute(request, response);
+            	// like조회
+                MemberDao dao = new MemberDao();
+                
+                request.setAttribute("list", dao.getMemberDtoByLikeEmail(request.getParameter("search")));
+                
+                viewpage = "/WEB-INF/test/test.jsp";
+                // request.setAttribute("list",여기에값)
             }
             // ... else if 반복
             //5. View 지정
-            RequestDispatcher dis = null;
-            if (urlcommand.equals("/test.do")){    dis = request.getRequestDispatcher(forward.getPath());}
-            else{dis = request.getRequestDispatcher(viewpage);}
+            RequestDispatcher dis = request.getRequestDispatcher(viewpage);
             
             dis.forward(request, response);
             //forward
