@@ -1,5 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -9,6 +8,7 @@
 <title>list</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -59,7 +59,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 					</table>
 					</div>
 							회원아이디 <input type="text" name="search" id="search"> 
-							<button value="이름검색하기" onclick="sendData()">검색하기</button>
+							<button value="이름검색하기"  id="searchbtn">검색하기</button>
     <!-- Footer -->
 	</div>
  <jsp:include page="/BootStrapInclude/Footer.jsp"></jsp:include>
@@ -67,7 +67,18 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 
 </body>
 <script type="text/javascript">
-        let httpReq=null;
+	// $('#searchbtn').click(function(){
+	// 	$.ajax({
+	// 		url:"test.do",
+	// 		data:{search:$('#search').val()},
+	// 		dataType:"html",
+	// 		success:function(element){
+	// 			console.log(element);
+	// 			$('#test').html(element);
+	// 		}
+	// 	});
+	// });
+let httpReq=null;
 	
 	function getInstance(){
 		  if(window.XMLHttpRequest){
