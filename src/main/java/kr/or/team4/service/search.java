@@ -16,9 +16,9 @@ public class search implements Action {
 		
         MemberDao dao = new MemberDao();
         
-        request.setAttribute("list", dao.getMemberDtoByLikeEmail(request.getParameter("search")));
+        request.setAttribute("list", dao.getMemberDtoByLikeId(request.getParameter("search")));
         
-        forward.setPath("/WEB-INF/test/test.jsp");
+        forward.setPath("/WEB-INF/createview/memberlisttable.jsp");
         forward.setRedirect(false);
         
 		return forward;

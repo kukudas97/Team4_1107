@@ -5,37 +5,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<script type="text/javascript">
-        let httpReq=null;
-	
-	function getInstance(){
-		  if(window.XMLHttpRequest){
-			  httpReq = new XMLHttpRequest(); //현재 브라우져 XMLHttpRequest 내장
-		  }else if(window.ActiveXObject){ //IE6 이하   //지금 필요없어요
-			  httpReq = new ActiveXObject("Msxml2.XMLHTTP");
-		  }else{
-			 throw new Error("AJAX 지원하지 않습니다"); 
-		  }
-		return httpReq;  
-	}
-	function handlerStateChange(){
-		 if(httpReq.readyState == 4){ //1. 서버에서 응답이 왔다면
-			 if(httpReq.status >= 200 && httpReq.status < 300){
-				//ㅇㅅㅇㅅㅇㅅㅇㅅㅇㅅㅇㅅㅇㅅㅇ
-				document.getElementById("test").innerHTML = httpReq.responseText;
-				//ㅇㅅㅇㅅㅇㅅㅇㅅㅇㅅㅇㅅㅇㅅㅇ
-			 }else{
-				 alert("status Text : " + httpReq.status);
-			 }
-		 }
-	}
-	function sendData(){
-		httpReq = getInstance();
-		httpReq.onreadystatechange = handlerStateChange;
-		httpReq.open("POST","test.do"); 
-		httpReq.send(); // form submit 버튼 클릭
-	}
-	</script>
 <title>list</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">

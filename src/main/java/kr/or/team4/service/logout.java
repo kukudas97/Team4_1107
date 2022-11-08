@@ -16,9 +16,9 @@ public class logout implements Action {
 		try {
             PrintWriter out = response.getWriter();
 	    	request.getSession().invalidate();
-	    	out.print("<script>alert('로그아웃');</script>");
+	    	request.setAttribute("message", "logout");
 	        forward = new ActionForward();
-	        forward.setPath("/WEB-INF/views/main.jsp");
+	        forward.setPath("/WEB-INF/createview/popup.jsp");
 	        forward.setRedirect(false);
 		}catch (Exception e) {
 			System.out.println(e);

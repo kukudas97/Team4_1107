@@ -184,10 +184,10 @@ public class MemberDao {
 		return row;
 	}
 //	select where like
-	public List<MemberDto> getMemberDtoByLikeEmail(String like){		
+	public List<MemberDto> getMemberDtoByLikeId(String like){		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from koreaMember where email like ?";
+		String sql = "select * from koreaMember where id like ?";
 		List<MemberDto> MemberDtolist = new ArrayList<MemberDto>();////////////////////////////////////
 		Connection conn = null;
 		//////////////////////////////////
