@@ -91,15 +91,16 @@ public class MemberServlet extends HttpServlet {
                 forward.setPath("/WEB-INF/views/main.jsp");
                 forward.setRedirect(false);
              } 
-            else if(urlcommand.equals("/search.do")) {
-               // like조회
-               MemberDao dao = new MemberDao();
-               
-               request.setAttribute("list", dao.getMemberDtoByLikeEmail(request.getParameter("search")));
-               
-               viewpage = "/WEB-INF/views/list.jsp";
-               // request.setAttribute("list",여기에값)
-            } else if(urlcommand.equals("/update.do")) {
+//            else if(urlcommand.equals("/search.do")) {
+//               // like조회
+//               MemberDao dao = new MemberDao();
+//               
+//               request.setAttribute("list", dao.getMemberDtoByLikeEmail(request.getParameter("search")));
+//               
+//               viewpage = "/WEB-INF/views/list.jsp";
+//               // request.setAttribute("list",여기에값)
+//            } 
+            else if(urlcommand.equals("/update.do")) {
                // 수정
             	action = new update();
             	forward = action.execute(request, response);
@@ -114,7 +115,7 @@ public class MemberServlet extends HttpServlet {
             } else if(urlcommand.equals("/detail.do")){
                action = new detail();
                forward = action.execute(request, response);
-            } else if (urlcommand.equals("/test.do")){
+            } else if (urlcommand.equals("/search.do")){
             	// like조회
                 action = new search();
                 forward = action.execute(request, response);

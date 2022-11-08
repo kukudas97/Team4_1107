@@ -94,7 +94,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 		httpReq = getInstance();
 		httpReq.onreadystatechange = handlerStateChange;
 		let search = document.getElementById("search").value;
-		httpReq.open("POST","test.do?search=" + search); 
+		httpReq.open("POST","search.do?search=" + search); 
 		httpReq.send(); // form submit 버튼 클릭
 	}
 	</script>
