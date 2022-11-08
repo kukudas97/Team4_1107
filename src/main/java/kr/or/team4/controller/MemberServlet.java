@@ -19,6 +19,7 @@ import kr.or.team4.service.alllist;
 import kr.or.team4.service.delete;
 import kr.or.team4.service.detail;
 import kr.or.team4.service.loginok;
+import kr.or.team4.service.logout;
 import kr.or.team4.service.registerOk;
 import kr.or.team4.service.search;
 import kr.or.team4.service.update;
@@ -58,18 +59,12 @@ public class MemberServlet extends HttpServlet {
                 forward = new ActionForward();
                 forward.setPath("/WEB-INF/views/login.jsp");
                 forward.setRedirect(false);
-//               viewpage="/WEB-INF/views/login.jsp";
-               
-               //session에 id 설정
             }else if(urlcommand.equals("/loginok.do")) {
             	action = new loginok();
             	forward = action.execute(request, response);
             }else if (urlcommand.equals("/logout.do")) {
-            	request.getSession().invalidate();
-            	out.print("<script>alert('로그아웃');</script>");
-                forward = new ActionForward();
-                forward.setPath("/WEB-INF/views/main.jsp");
-                forward.setRedirect(false);
+            	action = new logout();
+            	forward = action.execute(request, response);
             }
             else if(urlcommand.equals("/register.do")) {
                // 회원가입
@@ -91,15 +86,6 @@ public class MemberServlet extends HttpServlet {
                 forward.setPath("/WEB-INF/views/main.jsp");
                 forward.setRedirect(false);
              } 
-//            else if(urlcommand.equals("/search.do")) {
-//               // like조회
-//               MemberDao dao = new MemberDao();
-//               
-//               request.setAttribute("list", dao.getMemberDtoByLikeEmail(request.getParameter("search")));
-//               
-//               viewpage = "/WEB-INF/views/list.jsp";
-//               // request.setAttribute("list",여기에값)
-//            } 
             else if(urlcommand.equals("/update.do")) {
                // 수정
             	action = new update();
