@@ -35,8 +35,8 @@ public class MemberServlet extends HttpServlet {
     }
    private void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       //1. 한글 처리
-            request.setCharacterEncoding("UTF-8");
-            response.setCharacterEncoding("UTF-8");
+//            request.setCharacterEncoding("UTF-8");
+//            response.setCharacterEncoding("UTF-8");
             
             //2. 데이터 받기 (입력데이터 , command)
             String requestURI = request.getRequestURI();
