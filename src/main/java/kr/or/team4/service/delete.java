@@ -26,7 +26,7 @@ public class delete implements Action {
 			// TODO: handle exception
 		}
 		
-		return null;
+		return forward;
 	}
 
 }
